@@ -22,17 +22,39 @@ import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
-  
+
+  private ArrayList<String> messages = new ArrayList<String>;
+
 public class DataServlet extends HttpServlet {
-   private ArrayList<String> const messages = ['Hello','My','friend' ];
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response, ) throws IOException {
     String json = convertToJson(messages);
     response.setContentType("application/json");
     response.getWriter().println(json);
-    
-    
 
-    
+  }
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String text = getParameter(request, "text-input", "");
+    boolean upperCase = Boolean.parseBoolean(getParameter(request, "upper-case", "false"));
+    boolean sort = Boolean.parseBoolean(getParameter(request, "sort", "false"));
+
+    // Convert the text to upper case.
+    if (upperCase) {
+      text = text.toUpperCase();
+    }
+
+    // Break the text into individual words.
+    String[] words = text.split("\\s*,\\s*");
+
+    // Sort the words.
+    if (sort) {
+      Arrays.sort(words);
+    }
+
+    // Respond with the result.
+    response.setContentType("text/html;");
+    response.getWriter().println(Arrays.toString(words));
   }
 }

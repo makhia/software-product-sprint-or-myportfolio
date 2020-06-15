@@ -2,16 +2,42 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Makhi's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
+      <h1>Makhi Austin Portfolio</h1>
+      <p>Hello My name is Makhi. Below you will see a collection of some of my photographs. These were all taken this semester for my photography class.</p>
+      
+      <p> Contrasting trees </p>
+      <img src="Photos/Trees.jpg"/>
+      
+      <p> Banana-leaf capture</p>
+      <img src = "Photos/banana-leaf.jpg"/>
+      
+      <p> A stump in the darkness</p> 
+      <img src = "Photos/stump-darkness.jpg"/>
+      
+         <form action="/text" method="POST">
+
+      <p>Enter a comma-separated list of words for the photo ranking:</p>
+      <textarea name="text-input">one, two, three</textarea>
+      <br/><br/>
+
+      <p>Choose some options:</p>
+      <input type="checkbox" name="upper-case" value="true"> Upper-case
+      <br/>
+      <input type="checkbox" name="sort" value="true"> Alphabetize
+      <br/><br/>
+
+      <input type="submit" />
+    </form>
+     
+     
+      <p>Click here to get a random message:</p
+  <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
     </div>
   </body>
