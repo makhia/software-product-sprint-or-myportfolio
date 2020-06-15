@@ -29,10 +29,25 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response, ) throws IOException {
-    String json = convertToJson(messages);
-    response.setContentType("application/json");
-    response.getWriter().println(json);
+    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
 
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Task> tasks = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      long id = entity.getKey().getId();
+      String title = (String) entity.getProperty("title");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Task task = new Task(id, title, timestamp);
+      tasks.add(task);
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(tasks));
   }
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
